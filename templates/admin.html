@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Anchor University - Admin DashBoard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="compact">
+    <header class="top-bar">
+        <div class="logo"><img src="{{ url_for('static', filename='Logo.png') }}" alt="Laundry family"> Anchor University - Laundry Venture</div>
+        <div class="contact-info">
+            <p>Hours: MON - SAT 8:00 am - 6:00 pm</p>
+            <p>Email:  info@aul.edu.ng</p>
+            <a href="tel:+2347070679063" class="call-btn">Call (+234) 707 067 9063</a>
+        </div>
+    </header>
+    <nav class="navbar" id="navbar" style="padding: 0 20px; display: flex; justify-content: space-between; align-items: center;">
+        <div class="menu-toggle" id="menuToggle">☰</div>
+        <div class="user-bar">
+        {% if user %}
+        <p>Welcome, {{ user }} | </p>
+        {% endif %}
+        </div>
+        <a href="{{ url_for('admin') }}">DashBoard</a>
+        <a href="{{ url_for('admin_settings') }}">Settings</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+    <div class="content">
+        <h1>Admin DashBoard</h1>
+        <table id="bookingsTable">
+        <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Total (₦)</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Filled dynamically by JS -->
+      </tbody>
+    </table>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <pre id="bookingDetails"></pre>
+    </div>
+  </div>
+<table id="stats" class="stats">
+  <caption>Statistics Overview: Summary of bookings, revenue, and order statuses.</caption>
+  <tr>
+    <td>Total Bookings </td>
+    <td>Total Revenue </td>
+    <td>Pending </td>
+    <td>Completed </td>
+  </tr>
+  <tr>
+    <td><span id="statBookings">0</span></td>
+    <td>₦<span id="statRevenue">0</span></td>
+    <td><span id="statPending">0</span></td>
+    <td><span id="statCompleted">0</span></td>
+  </tr>
+</table>
+
+  <script src="{{ url_for('static', filename='admin.js') }}"></script>
+    <footer id="footer" class="foot">
+        <p>&copy; 2023 Anchor University - Laundry Venture. All rights reserved.</p>
+    </footer>
+    <script>
+        // Responsive navbar toggle
+        document.getElementById('menuToggle').onclick = function() {
+            document.getElementById('navbar').classList.toggle('active');
+        };
+    </script>
+</body>
+</html>

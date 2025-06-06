@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+   <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Anchor University - Laundry Venture</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="logo"><img src="{{ url_for('static', filename='Logo.png') }}" alt="Laundry family"> Anchor University - Laundry Venture</div>
+        <div class="contact-info">
+            <p>Hours: MON - SAT 8:00 am - 9:00 pm</p>
+            <p>Email:  info@aul.edu.ng</p>
+            <a href="tel:+2347070679063" class="call-btn">Call (+234) 707 067 9063</a>
+        </div>
+    </header>
+    <nav>
+    <nav class="navbar">
+        <a href="/">Home</a>
+        <a href="{{ url_for('service') }}">Services</a>
+        <a href="{{ url_for('price') }}">Pricing</a>
+        <a href="{{ url_for('booking') }}">Book Online</a>
+        <a href="{{ url_for('about') }}">About Us</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+        <a href="{{ url_for('register') }}" class="bin primary">Log In</a>
+    </nav>
+    <div class="menu-toggle">☰</div>
+</nav>
+<main class="about-section">
+    <div class="container">
+      <h2>About Us</h2>
+      <p>
+        At Anchor University - Laundry Venture, we believe that clean clothes lead to a clearer mind. Established in 2017, we've served our community on campus with dedication and professionalism, offering premium laundry and dry cleaning services to students, staff, and anyone on campus interested in getting the best laundry services around. We are located at Anchor University Ipaja Lagos at the back of the guest house on campus, there's a sign board placed outside for better direction.
+      </p>
+      <p>
+        Our mission is to make laundry effortless for busy households and businesses by combining state-of-the-art equipment with eco-friendly products and a customer-first mindset.
+      </p>
+      <div class="about-features">
+        <div class="feature-bo">
+          <h3>✅ Eco-Friendly</h3>
+          <p>We use biodegradable detergents and energy-efficient machines.</p>
+        </div>
+        <div class="feature-bo">
+          <h3>⏱️ Fast Turnaround</h3>
+          <p>48hrs of delivery and also same-day and next-day service(express delivery) options available.</p>
+        </div>
+        <div class="feature-bo">
+          <h3>📦 Pickup & Delivery</h3>
+          <p>Schedule pickups right from your phone or laptop on our <br><br> <a class="kin" href="{{ url_for('booking') }}">book online</a><br><br> page.</p>
+        </div>
+      </div>
+      <div class="about-images">
+        <img src="{{ url_for('static', filename='Hanging.avif') }}"  alt="Laundry Service Image 1" />
+        <img src="{{ url_for('static', filename='ironing.avif') }}"  alt="Laundry Service Image 2" />
+        <img src="{{ url_for('static', filename='washing.jpg') }}"  alt="Laundry Service Image 3" />
+      </div>
+      <div class="history-section">
+        <h2>Our History</h2>
+        <div class="tabs">
+          <button class="tab-button active" onclick="openTab(event, 'founding')">Founding History</button>
+          <button class="tab-button active" onclick="openTab(event, 'milestones')">Key Milestones</button>
+        </div>
+        
+        <div id="founding" class="tab-content active">
+          <h3>The Beginning</h3>
+          <p>Anchor University Laundry Venture was founded in 2017 with a vision to revolutionize campus laundry services. What started as a small operation with just two washing machines has grown into a comprehensive laundry service center serving the entire university community.</p>
+          <p>Our founder, recognizing the need for quality laundry services on campus, established the venture with a commitment to excellence and student convenience. The location was set up near the guest house, strategically positioned to serve both residential and non-residential members of the university community.</p>
+        </div>
+        
+        <div id="milestones" class="tab-content">
+          <h3>Our Journey</h3>
+          <ul class="milestone-list">
+            <li><strong>May 2017:</strong> Launched with basic laundry services</li>
+            <li><strong>August 2018:</strong> Expanded to include dry cleaning services</li>
+            <li><strong>November 2019:</strong> Introduced online booking system</li>
+            <li><strong>January 2020:</strong> Upgraded to eco-friendly equipment</li>
+            <li><strong>March 2020:</strong> Implemented express delivery service</li>
+          </ul>
+        </div>
+      </div>
+      <div class="why-choose-us">
+        <h2>Why Choose Us?</h2>
+        <p>We pride ourselves on offering the best laundry services on campus with a focus on quality, speed, and customer satisfaction. Our state-of-the-art facilities and eco-friendly practices set us apart.</p>
+      </div>
+      <div class="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial">
+          <p>"Amazing service! Fast and reliable." - Adewusi Oreoluwa</p>
+        </div>
+        <div class="testimonial">
+          <p>"Best laundry service on campus!" - Folorunsho Oluwatobiloba</p>
+        </div>
+      </div>
+      <div class="call-to-action">
+        <h2>Ready to Experience the Best Laundry Service?</h2>
+        <a href="{{ url_for('contact') }}" class="cta-button">Contact Us Today</a>
+      </div>
+      <div class="credits">
+        <h2>Credits</h2>
+        <p>This website was created by Group 9, CSC 224, Anchor University.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Laundry Service. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function openTab(evt, tabName) {
+      // Hide all tab content
+      const tabContents = document.getElementsByClassName("tab-content");
+      for (let content of tabContents) {
+        content.classList.remove("active");
+      }
+
+      // Remove active class from all tab buttons
+      const tabButtons = document.getElementsByClassName("tab-button");
+      for (let button of tabButtons) {
+        button.classList.remove("active");
+      }
+
+      // Show the selected tab content and mark its button as active
+      document.getElementById(tabName).classList.add("active");
+      evt.currentTarget.classList.add("active");
+    }
+  </script>
+      <script>
+        const navbar = document.querySelector('.navbar');
+        const menuToggle = document.querySelector('.menu-toggle');
+
+        menuToggle.addEventListener('click', () => {
+            navbar.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>

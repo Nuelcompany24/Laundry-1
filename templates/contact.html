@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Contact - Anchor Laundry</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="top-bar">
+        <div class="logo"><img src="{{ url_for('static', filename='Logo.png') }}" alt="Laundry family"> Anchor University - Laundry Venture</div>
+        <div class="contact-info">
+            <p>Hours: MON - SAT 8:00 am - 9:00 pm</p>
+            <p>Email: info@aul.edu.ng</p>
+            <a href="tel:+2347070679063" class="call-btn">Call (+234) 707 067 9063</a>
+        </div>
+    </header>
+    <nav>
+    <nav class="navbar">
+        <a href="/">Home</a>
+        <a href="{{ url_for('service') }}">Services</a>
+        <a href="{{ url_for('price') }}">Pricing</a>
+        <a href="#">Book Online</a>
+        <a href="{{ url_for('about') }}">About Us</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+        <a href="{{ url_for('login') }}" class="bin primary">Log In</a>
+    </nav>
+        <div class="menu-toggle">☰</div>
+</nav>
+<section>
+    <div class="intro">
+        <h2>Get In Touch Us</h2>
+        <div class="ser-con">
+            <div class="ser-item">
+                <img src="{{ url_for('static', filename='address .jpg') }}" alt="Deep Wash">
+                <p><b>First Branch</b></p>
+                <p>Anchor University, Ayobo, Lagos</p>
+                <p>12 Ipaja Rd, Lagos, LA</p>
+                <p>Back Of Guest House.</p>
+            </div>
+            <div class="ser-item">
+                <img src="{{ url_for('static', filename='phone.png') }}" alt="Cool Wash">
+                <p><b>Laundry Manager</b></p>
+                <p>Phone:<br> +234 707 067 9064</p>
+            </div>
+            <div class="ser-item">
+                <img src="{{ url_for('static', filename='email.png') }}" alt="Laundry family">
+                <p><b>Laundry</b></p>
+                <p>Email:  info@aul.edu.ng</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="plom">
+    <div class="con">
+        <div class="item">
+            <h3>Message Us<h3>
+            <p>
+            Have questions about fabric care, stain removal, or the best way to handle delicate items? Need assistance with placing an order or managing your account? Our knowledgeable support team is just a message away. Let us guide you through our services and ensure your laundry is handled with the utmost care. Message us now to get started!</p>
+        </div>
+        <div class="item">
+            <form method="POST" action="{{ url_for('contact') }}" class="form-container">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <div class="error-message" id="name-error"></div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email" required>
+                    <div class="error-message" id="email-error"></div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                    <div class="error-message" id="message-error"></div>
+                </div>
+    
+                <button type="submit">Send Message</button>
+            </div>
+        </div>
+    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+</section>
+<footer>
+    <p>&copy; 2025 Laundry Serivce. All rights reserved.</p>
+</footer>
+    <script>
+        const navbar = document.querySelector('.navbar');
+        const menuToggle = document.querySelector('.menu-toggle');
+
+        menuToggle.addEventListener('click', () => {
+            navbar.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>

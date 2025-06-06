@@ -1,0 +1,94 @@
+[
+    {
+        "order_id": "ORD-812B5871",
+        "full_name": "Amadi Chidera",
+        "email": "camadi318@gmail.com",
+        "phone": "8103835314",
+        "address": "G008",
+        "delivery_option": "delivery",
+        "washing_type": "ironing-only",
+        "delivery_type": "express",
+        "clothes": {
+            "sneakers": {
+                "items": [
+                    {
+                        "color": "white",
+                        "qty": 3
+                    }
+                ]
+            }
+        },
+        "subtotal": 3000,
+        "delivery_fee": 200,
+        "total": 3200,
+        "payment_method": "cash",
+        "payment_reference": "CASH-591815",
+        "special_instructions": "",
+        "status": "pending",
+        "created_at": "2025-06-04T12:57:16.212625"
+    },
+    {
+        "order_id": "ORD-54E4B865",
+        "full_name": "Ademola Lydia",
+        "email": "lydiaademolaadeola@gmail.com",
+        "phone": "7041862136",
+        "address": "Store pickup",
+        "delivery_option": "pickup",
+        "washing_type": "normal-wash",
+        "delivery_type": "normal",
+        "clothes": {
+            "sneakers": {
+                "items": [
+                    {
+                        "color": "white",
+                        "qty": 2
+                    }
+                ]
+            }
+        },
+        "subtotal": 3000,
+        "delivery_fee": 0,
+        "total": 3000,
+        "payment_method": "transfer",
+        "payment_reference": "BANK-633246",
+        "special_instructions": "",
+        "status": "pending",
+        "created_at": "2025-06-04T16:43:08.726401"
+    },
+    {
+        "order_id": "ORD-0425B0AA",
+        "full_name": "Amadi Chidera",
+        "email": "camadi314@gmail.com",
+        "phone": "7046165756",
+        "address": "Store pickup",
+        "delivery_option": "pickup",
+        "washing_type": "dry-clean",
+        "delivery_type": "express",
+        "clothes": {
+            "suit": {
+                "items": [
+                    {
+                        "color": "black",
+                        "qty": 3
+                    }
+                ]
+            },
+            "complete-agbada": {
+                "items": [
+                    {
+                        "color": "gray",
+                        "qty": 1
+                    }
+                ]
+            }
+        },
+        "subtotal": 7200,
+        "delivery_fee": 0,
+        "total": 7200,
+        "payment_method": "cash",
+        "payment_reference": "CASH-949754",
+        "special_instructions": "",
+        "status": "pending",
+        "created_at": "2025-06-04T18:09:32.451809"
+    }
+]

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+   <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Service - Laundry Venture</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='laundry.js') }}">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="logo"><img src="{{ url_for('static', filename='Logo.png') }}" alt="Laundry family"> Anchor University - Laundry Venture</div>
+        <div class="contact-info">
+            <p>Hours: MON - SAT 8:00 am - 9:00 pm</p>
+            <p>Email:  info@aul.edu.ng</p>
+            <a href="tel:+2347070679063" class="call-btn">Call (+234) 707 067 9063</a>
+        </div>
+    </header>
+    <nav>
+    <nav class="navbar">
+        <a href="/">Home</a>
+        <a href="{{ url_for('service') }}">Services</a>
+        <a href="{{ url_for('price') }}">Pricing</a>
+        <a href="{{ url_for('booking') }}">Book Online</a>
+        <a href="{{ url_for('about') }}">About Us</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+        <a href="{{ url_for('register') }}" class="bin primary">Log In</a>
+    </nav>
+        <div class="menu-toggle">☰</div>
+</nav>
+<section>
+    <div class="pitro">
+        <h2>Our Services</h2>
+        <div class="ser-con">
+            <div class="se-item">
+                <img src="{{ url_for('static', filename='Deep wash.png') }}" alt="Deep Wash">
+                <p><b>Deep Wash</b></p>
+                <p>Our deep wash expertly removes tough dirt and odors for exceptionally fresh and clean clothes. Trust us for thorough care.</p>
+                <p class="but"><a href="{{ url_for('login') }}">Click To Enter </a></p>
+            </div>
+            <div class="se-item">
+                <img src="{{ url_for('static', filename='handwash.png') }}" alt="Cool Wash">
+                <p><b>Hand Wash</b></p>
+                <p>Our cool wash service is gentle on fabrics while effectively removing dirt and stains.</p>
+                <p class="but"><a href="{{ url_for('login') }}">Click To Enter </a></p>
+            </div>
+            <div class="se-item">
+                <img src="{{ url_for('static', filename='Dry clean.png') }}" alt="Laundry family">
+                <p><b>Dry Clean</b></p>
+                <p>We treat your laundry like family, ensuring every item is handled with care and precision.</p>
+                <p class="but"><a href="{{ url_for('login') }}">Click To Enter </a></p>
+            </div>
+            <div class="se-item">
+                <img src="{{ url_for('static', filename='Wash&fold.png') }}" alt="Deep Wash">
+                <p><b>Wash & Fold</b></p>
+                <p>We offer a deep wash service that ensures your clothes are thoroughly cleaned and refreshed.</p>
+                <p class="but"><a href="{{ url_for('login') }}">Click To Enter </a></p>
+            </div>
+            <div class="se-item">
+                <img src="{{ url_for('static', filename='express.png') }}" alt="Cool Wash">
+                <p><b>Express Service</b></p>
+                <p>Our cool wash service is gentle on fabrics while effectively removing dirt and stains.</p>
+                <p class="but"><a href="{{ url_for('login') }}">Click To Enter </a></p>
+            </div>
+            <div class="se-item">
+                <img src="{{ url_for('static', filename='pickup.png') }}" alt="Deep Wash">
+                <p><b>Pickup Service</b></p>
+                <p>We offer a deep wash service that ensures your clothes are thoroughly cleaned and refreshed.</p>
+                <p class="but"><a href="{{ url_for('login') }}">Click To Enter </a></p>
+        
+    </div>
+    </section>
+       <footer>
+        <p>&copy; 2025 Laundry Serivce. All rights reserved.</p>
+    </footer>
+        <script>
+        const navbar = document.querySelector('.navbar');
+        const menuToggle = document.querySelector('.menu-toggle');
+
+        menuToggle.addEventListener('click', () => {
+            navbar.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>
+
+    
