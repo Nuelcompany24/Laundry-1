@@ -9,7 +9,8 @@ from datetime import datetime, timezone
 import pandas as pd
 from flask import send_file
 import io
-
+from flask import request, jsonify, render_template, session
+from flask_login import login_required
 from email.mime.text import MIMEText
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
@@ -38,7 +39,7 @@ app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'super_secret_default_key_change_me!')
 BOOKINGS_FILE = 'bookings.json'
 # Configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///data.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///laundry.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize extensions with app
@@ -347,31 +348,56 @@ def dashboard():
 @admin_required
 def admin():
     user = db.session.get(User, session["user_id"])
-    if user.role != 'admin':
-        return redirect(url_for("dashboard"))
 
-    if not os.path.exists(BOOKINGS_FILE):
-        bookings = []
-    else:
-        with open(BOOKINGS_FILE, 'r') as file:
-            bookings = json.load(file)
+    # Get all bookings ordered by date
+    bookings_query = Booking.query.order_by(Booking.created_at.desc()).all()
+
+    # Prepare booking data
+    bookings = [{
+        'order_id': b.order_id,
+        'name': b.full_name,
+        'email': b.email,
+        'phone': b.phone,
+        'total': b.total,
+        'status': b.status,
+        'date': b.created_at.strftime('%Y-%m-%d %H:%M')
+    } for b in bookings_query]
 
     # Calculate admin stats
-    total_bookings = len(bookings)
-    total_revenue = sum(b.get('total', 0) for b in bookings)
-    pending = sum(1 for b in bookings if b.get('status') == 'pending')
-    completed = sum(1 for b in bookings if b.get('status') == 'completed')
-
     stats = {
-        'total_bookings': total_bookings,
-        'total_revenue': total_revenue,
-        'pending': pending,
-        'completed': completed
+        'total_bookings': len(bookings),
+        'total_revenue': sum(b['total'] for b in bookings),
+        'pending': sum(1 for b in bookings if b['status'] == 'pending'),
+        'completed': sum(1 for b in bookings if b['status'] == 'completed')
     }
 
-    return render_template("admin.html", bookings=bookings, stats=stats)
+    # Return JSON if it's an API call
+    if request.accept_mimetypes.accept_json and not request.accept_mimetypes.accept_html:
+        return jsonify({
+            'bookings': bookings,
+            'stats': stats
+        })
 
-
+    # Otherwise, render the admin dashboard template
+    return render_template(
+        "admin.html",
+        bookings=bookings,
+        stats=stats,
+        user=user
+    )
+@app.route("/admin/<order_id>", methods=["POST"])
+@admin_required
+def update_booking_status(order_id):
+    new_status = request.json.get('status')
+    booking = Booking.query.filter_by(order_id=order_id).first()
+    
+    if not booking:
+        return jsonify({'message': 'Booking not found'}), 404
+    
+    booking.status = new_status
+    db.session.commit()
+    
+    return jsonify({'message': 'Status updated successfully'})
 @app.route('/export-excel')
 @admin_required
 def export_excel():
@@ -394,25 +420,47 @@ def export_excel():
     output.seek(0)
     return send_file(output, attachment_filename="bookings.xlsx", as_attachment=True)
 
-
-
 @app.route("/about")
 def about():
     return render_template("about.html")
-
-
 @app.route("/price")
 def price():
     return render_template("price.html")
-
 @app.route("/service")
 def service():
     return render_template("service.html")
 
 
-@app.route("/booking")
+@app.route("/booking", methods=["GET", "POST"])
 def booking():
-    return render_template("login.html")
+    if "user_id" in session:
+        user = db.session.get(User, session["user_id"])
+        if user:
+            return redirect(url_for('admin' if user.is_admin else 'dashboard'))
+
+    if request.method == 'POST':
+        email = request.form.get('email', '').strip()
+        password = request.form.get('password', '').strip()
+
+        if not email or not password:
+            flash("All fields are required!", "warning")
+            return redirect(url_for('login'))
+
+        user = User.query.filter_by(email=email).first()
+
+        if user and user.check_password(password):
+            session["user_id"] = user.id
+            session["role"] = user.role
+            user.last_login = datetime.now(timezone.utc)
+            db.session.commit()
+            
+            flash("Logged in successfully!", "success")
+            return redirect(url_for('admin' if user.is_admin else 'dashboard'))
+        
+        flash("Invalid email or password!", "danger")
+
+    return render_template('login.html')
+
 
 @app.route('/admin/orders')
 @admin_required
@@ -461,6 +509,33 @@ def create_admin():
             flash("An error occurred while creating admin account.", "danger")
     
     return render_template('create_admin.html')
+@app.route("/admin/booking/<order_id>")
+@admin_required
+def get_booking_details(order_id):
+    booking = Booking.query.filter_by(order_id=order_id).first()
+
+    if not booking:
+        return jsonify({"error": "Booking not found"}), 404
+
+    return jsonify({
+        "order_id": booking.order_id,
+        "name": booking.full_name,
+        "email": booking.email,
+        "phone": booking.phone,
+        "address": booking.address,
+        "delivery_option": booking.delivery_option,
+        "washing_type": booking.washing_type,
+        "delivery_type": booking.delivery_type,
+        "clothes": json.loads(booking.clothes),
+        "subtotal": booking.subtotal,
+        "delivery_fee": booking.delivery_fee,
+        "total": booking.total,
+        "payment_method": booking.payment_method,
+        "payment_reference": booking.payment_reference,
+        "special_instructions": booking.special_instructions,
+        "status": booking.status,
+        "created_at": booking.created_at.strftime("%Y-%m-%d %H:%M")
+    })
 
 @app.route("/settings", methods=["GET", "POST"])
 @admin_required
