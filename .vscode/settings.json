@@ -1,0 +1,20 @@
+{
+    "python.linting.pylintEnabled": false,
+    "python.pythonPath": "venv\\Scripts\\python.exe",
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "cSpell.words": [
+        "deepwash",
+        "dotenv",
+        "handwash",
+        "navb",
+        "navba",
+        "pitro",
+        "pric",
+        "sdfghjkloiuyhgf",
+        "Serivce",
+        "stylesheet"
+    ],
+    "CodeGPT.apiKey": "CodeGPT Plus Beta",
+    "codium.codeCompletion.enable": true
+}

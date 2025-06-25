@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Official laundry service platform of Anchor University. Schedule bookings, check service prices, and manage orders conveniently online.">
+    <meta name="keywords" content="Anchor University Laundry, laundry services, washing, dry cleaning, AUL, laundry venture, book laundry online, student laundry service">
+    <meta name="author" content="Anchor University Laundry">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Anchor University - Laundry Venture</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="logo"><img src="{{ url_for('static', filename='Logo.png') }}" alt="Laundry family"> Anchor University - Laundry Venture</div>
+        <div class="contact-info">
+            <p>Hours: MON - SAT 8:00 am - 9:00 pm</p>
+            <p>Email:  info@aul.edu.ng</p>
+            <a href="tel:+2347070679063" class="call-btn">Call (+234) 707 067 9063</a>
+        </div>
+    </header>
+    <nav>
+    <nav class="navbar">
+        <a href="/">Home</a>
+        <a href="{{ url_for('service') }}">Services</a>
+        <a href="{{ url_for('price') }}">Pricing</a>
+        <a href="{{ url_for('booking') }}">Book Online</a>
+        <a href="{{ url_for('about') }}">About Us</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+        <a href="{{ url_for('register') }}" class="bin primary">Log In</a>
+    </nav>
+    <div class="menu-toggle">☰</div>
+</nav>
+    <section class="hero">
+        <div class="hero-text">
+            <h2>Efficient & ECO-Friendly</h2>
+            <h1>Laundry and Dry Cleaning Services</h1>
+            <div class="hero-buttons">
+                <a href="{{ url_for('login') }}" class="btn primary">Schedule a Pickup</a>
+                <a href="tel:+2347070679063" class="btn secondary">Call (+234) 707 067 9063</a>
+            </div>
+        </div>
+        <div class="hero-img">
+            <img src="{{ url_for('static', filename='laundry.jpg') }}" alt="Laundry family">
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature-box">
+            <h3>🕒 Convenience</h3>
+            <p>With just a tap of a button, your laundry gets done, giving you more time for what matters.</p>
+        </div>
+        <div class="feature-box">
+            <h3>📦 Quality</h3>
+            <p>We use top-tier products to make sure your clothes are always fresh, clean, and cared for.</p>
+        </div>
+    </section>
+    <section class="her">
+        <div class="her-text">
+            <h3>About Us</h3>
+            <p>We simplify laundry with our convenient online platform, offering wash & fold, dry cleaning, and pickup/delivery services. Our dedicated team ensures your garments receive expert care, saving you time and effort. Experience effortless laundry with us today!</p>
+            <div class="hero-buttons">
+                <a href="{{ url_for('about') }}" class="btn primary">Click To know More About Us</a>
+            </div>
+        </div>
+        <div class="her-img">
+            <img src="{{ url_for('static', filename='About Us.jpg') }}" alt="Laundry family">
+        </div>
+    </section>
+    <section class="Serivces">
+        <h3>Our Service</h3>
+            <div class="serv-con">
+                <div class="serv-item">
+                    <img src="{{ url_for('static', filename='wash&fold.jpg') }}" alt="Deep Wash">
+                    <h3>Wash & Fold</h3>
+                    <p>Professional washing, drying, and folding of your everyday laundry.</p>
+                </div>
+                <div class="serv-item">
+                    <img src="{{ url_for('static', filename='cool wash.jpg') }}" alt="Cool Wash">
+                    <h3>Cool Wash</h3>
+                    <p>Professional washing, drying, and folding for perfectly clean and neatly folded everyday laundry, simplifying your life</p>
+                </div>
+                <div class="serv-item">
+                    <img src="{{ url_for('static', filename='pickup.jpg') }}" alt="Laundry family">
+                    <h3>Pick Up Services</h3>
+                    <p>Easy laundry! We pick up, wash, dry, fold, and deliver, simplifying your life.</p>
+                </div>
+                <div class="serv-item">
+                    <img src="{{ url_for('static', filename='express service.jpg') }}" alt="Laundry family">
+                    <h3>Express Service</h3>
+                    <p>We offers express washing, drying, and folding for your everyday laundry needs.</p>
+                </div>
+            </div>
+    </section>
+    <section>
+        <h3 class="loc">Find Us Here</h3>
+        <img src="{{ url_for('static', filename='map.jpg') }}" alt="Laundry family" class="footer-img">
+    </section>
+    <footer>
+        <p>&copy; 2025 Laundry Serivce. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const navbar = document.querySelector('.navbar');
+        const menuToggle = document.querySelector('.menu-toggle');
+
+        menuToggle.addEventListener('click', () => {
+            navbar.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>

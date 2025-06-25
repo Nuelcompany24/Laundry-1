@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"> 
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
+  <title>Anchor University - Admin Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="compact">
+
+  <!-- Header -->
+  <header class="top-bar">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='Logo.png') }}" alt="Laundry family">
+      Anchor University - Laundry Venture
+    </div>
+    <div class="contact-info">
+      <p>Hours: MON - SAT 8:00 am - 6:00 pm</p>
+      <p>Email: info@aul.edu.ng</p>
+      <a href="tel:+2347070679063" class="call-btn">Call (+234) 707 067 9063</a>
+    </div>
+  </header>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar" style="padding: 0 20px; display: flex; justify-content: space-between; align-items: center;">
+    <div class="menu-toggle" id="menuToggle">☰</div>
+    <div class="user-bar">
+      {% if user %}
+        <p>Welcome, {{ user.username }} | </p>
+      {% endif %}
+    </div>
+    <a href="{{ url_for('admin') }}">Dashboard</a>
+    <a href="{{ url_for('admin_settings') }}">Settings</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="content">
+    <h1>Admin Dashboard</h1>
+
+    <!-- Bookings Table -->
+    <table id="bookingsTable">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Total (₦)</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for booking in bookings %}
+        <tr>
+          <td>{{ booking.order_id }}</td>
+          <td>{{ booking.name }}</td>
+          <td>{{ booking.email }}</td>
+          <td>{{ booking.phone }}</td>
+          <td>₦{{ booking.total }}</td>
+          <td>{{ booking.status }}</td>
+          <td>{{ booking.date }}</td>
+          <td><button onclick="viewBookingById('{{ booking.order_id }}')">View</button></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- Booking Details Modal -->
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div id="bookingDetails" class="booking-details"></div>
+      </div>
+    </div>
+
+    <!-- Stats Table -->
+    <table id="stats" class="stats">
+      <caption>Statistics Overview: Summary of bookings, revenue, and order statuses.</caption>
+      <tr>
+        <td>Total Bookings</td>
+        <td>Total Revenue</td>
+        <td>Pending</td>
+        <td>Completed</td>
+      </tr>
+      <tr>
+        <td><span id="statBookings">{{ stats.total_bookings }}</span></td>
+        <td>₦<span id="statRevenue">{{ stats.total_revenue }}</span></td>
+        <td><span id="statPending">{{ stats.pending }}</span></td>
+        <td><span id="statCompleted">{{ stats.completed }}</span></td>
+      </tr>
+    </table>
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer" class="foot">
+    <p>&copy; 2023 Anchor University - Laundry Venture. All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='admin.js') }}"></script>
+  <script>
+    // Responsive navbar toggle
+    document.getElementById('menuToggle').onclick = function () {
+      document.getElementById('navbar').classList.toggle('active');
+    };
+
+    function viewBooking(data) {
+      const details = JSON.stringify(data, null, 2);
+      document.getElementById("bookingDetails").textContent = details;
+      document.getElementById("modal").classList.remove("hidden");
+    }
+
+    function closeModal() {
+      document.getElementById("modal").classList.add("hidden");
+    }
+    function viewBooking(orderId) {
+      document.getElementById('bookingDetails').innerHTML = "Loading...";
+      fetch(`/admin/booking/${orderId}`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.error) return alert(data.error);
+
+      const html = `
+        <table class="detail-table">
+          <tr><td><strong>Order ID</strong></td><td>${data.order_id}</td></tr>
+          <tr><td><strong>Name</strong></td><td>${data.full_name}</td></tr>
+          <tr><td><strong>Email</strong></td><td>${data.email}</td></tr>
+          <tr><td><strong>Phone</strong></td><td>${data.phone}</td></tr>
+          <tr><td><strong>Address</strong></td><td>${data.address || '-'}</td></tr>
+          <tr><td><strong>Delivery Option</strong></td><td>${data.delivery_option}</td></tr>
+          <tr><td><strong>Washing Type</strong></td><td>${data.washing_type}</td></tr>
+          <tr><td><strong>Delivery Type</strong></td><td>${data.delivery_type}</td></tr>
+          <tr><td><strong>Status</strong></td><td>${data.status}</td></tr>
+          <tr><td><strong>Total</strong></td><td>₦${Number(data.total).toLocaleString()}</td></tr>
+          <tr><td><strong>Payment Method</strong></td><td>${data.payment_method}</td></tr>
+          <tr><td><strong>Payment Status</strong></td><td>${data.payment_reference ? 'Paid' : 'Unpaid'}</td></tr>
+          <tr><td><strong>Special Instructions</strong></td><td>${data.special_instructions || '-'}</td></tr>
+          <tr><td><strong>Date</strong></td><td>${new Date(data.created_at).toLocaleString()}</td></tr>
+        </table>
+      `;
+
+      document.getElementById('bookingDetails').innerHTML = html;
+      document.getElementById('modal').classList.remove('hidden');
+    })
+    .catch(err => {
+      console.error("Failed to load booking details:", err);
+      alert("Could not load booking details.");
+    });
+}
+
+
+  </script>
+</body>
+</html>

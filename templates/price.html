@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+   <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Price - Laundry Venture</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='laundry.js') }}">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="logo"><img src="{{ url_for('static', filename='Logo.png') }}" alt="Laundry family"> Anchor Laundry Venture</div>
+        <div class="contact-info">
+            <p>Hours: MON - SAT 8:00 am - 9:00 pm</p>
+            <p>Email:  info@aul.edu.ng</p>
+            <a href="tel:+2347070679063" class="call-btn">Call (+234) 707 067 9063</a>
+        </div>
+    </header>
+    <nav>
+    <nav class="navbar">
+        <a href="/">Home</a>
+        <a href="{{ url_for('service') }}">Services</a>
+        <a href="{{ url_for('price') }}">Pricing</a>
+        <a href="{{ url_for('booking') }}">Book Online</a>
+        <a href="{{ url_for('about') }}">About Us</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+        <a href="{{ url_for('register') }}" class="bin primary">Log In</a>
+    </nav>
+        <div class="menu-toggle">☰</div>
+</nav> 
+</head>
+<body>
+    <div class="container">
+        <h2>AUL Laundry Price List</h2>
+        <div class="price-row">
+            <div class="price-col">
+                <h3>Top Wears</h3>
+                <ul>
+                    <li><img src="{{ url_for('static', filename='white.jpg') }}" alt="White Shirt" width="80" height="80">White Shirt - ₦500</li>
+                    <li><img src="{{ url_for('static', filename='Colored.jpg') }}" alt="Colored Shirt" width="80" height="80">Colored Shirt - ₦400</li>
+                    <li><img src="{{ url_for('static', filename='Polo.jpg') }}" alt="Polo Shirt" width="80" height="80">Polo - ₦400</li>
+                    <li><img src="{{ url_for('static', filename='Jacket.jpg') }}" alt="Jacket" width="80" height="80">Jacket - ₦700</li>
+                    <li><img src="{{ url_for('static', filename='Hoodie.jpg') }}" alt="Hoodie" width="80" height="80">Hoodie - ₦500</li>
+                     <li><img src="{{ url_for('static', filename='blazer.jpg') }}" alt="Blazer" width="80" height="80">Blazer - ₦600</li>
+                </ul>
+            </div>
+            
+            <div class="price-col">
+                <h3>Bottom Wears</h3>
+                <ul>
+                    <li><img src="{{ url_for('static', filename='Short.jpg') }}" alt="Short Knicker" width="80" height="80">Short Knicker - ₦300</li>
+                    <li><img src="{{ url_for('static', filename='Skirt.jpg') }}" alt="Skirt" width="80" height="80">Skirt - ₦400</li>
+                    <li><img src="{{ url_for('static', filename='Trouser.jpg') }}" alt="Trousers" width="80" height="80">Trousers - ₦400</li>
+                </ul>
+            </div>
+            
+            <div class="price-col">
+                <h3>Full Wears</h3>
+                <ul>
+                    <li><img src="{{ url_for('static', filename='Gown.jpg') }}" alt="Gown" width="80" height="80">Gown - ₦500</li>
+                    <li><img src="{{ url_for('static', filename='Nurse.jpg') }}" alt="Nursing Gown" width="80" height="80">Nursing Gown - ₦400</li>
+                    <li><img src="{{ url_for('static', filename='Lab-Coat-White.jpg') }}" alt="Labcoat" width="80" height="80">Labcoat - ₦400</li>
+                    <li><img src="{{ url_for('static', filename='images.jpg') }}" alt="Buba" width="80" height="80">Buba - ₦600</li>
+                    <li><img src="{{ url_for('static', filename='images.jpg') }}" alt="Sokoto Ankara" width="80" height="80">Sokoto Ankara - ₦600</li>
+                </ul>
+            </div>
+            
+            <div class="price-col">
+                <h3>Others</h3>
+                <ul>
+                    <li><img src="{{ url_for('static', filename='Tie.jpg') }}" alt="Tie" width="80" height="80">Tie - ₦200</li>
+                    <li><img src="{{ url_for('static', filename='Case.jpg') }}" alt="Pillow Case" width="80" height="80">Pillow Case - ₦200</li>
+                    <li><img src="{{ url_for('static', filename='Material.jpg') }}" alt="Material" width="80" height="80">Material - ₦600</li>
+                    <li><img src="{{ url_for('static', filename='Sheet.jpg') }}" alt="Bed Sheet" width="80" height="80">Bed Sheet - ₦600</li>
+                    <li><img src="{{ url_for('static', filename='Foul.jpg') }}" alt="Colored Towel" width="80" height="80">Colored Towel - ₦500</li>
+                    <li><img src="{{ url_for('static', filename='Towel.jpg') }}" alt="White Towel" width="80" height="80">White Towel - ₦600</li>
+                    <li><img src="{{ url_for('static', filename='Medium.jpg') }}" alt="Duvet (medium)" width="80" height="80">Duvet (medium) - ₦1200</li>
+                    <li><img src="{{ url_for('static', filename='Duvet.jpg') }}" alt="Duvet (large)" width="80" height="80">Duvet (large) - ₦1500</li>
+                </ul>
+            </div>
+            
+            <div class="price-col">
+                <h3>Express Delivery</h3>
+                <ul>
+                    <li><img src="{{ url_for('static', filename='Jersey.jpg') }}" alt="Jersey" width="80" height="80">Jersey - ₦600 <small>(Express: +₦500)</small></li>
+                    <li><img src="{{ url_for('static', filename='Agbada.jpg') }}" alt="Complete Agbada" width="80" height="80">Complete Agbada - ₦2000 <small>(Express: +₦700)</small></li>
+                    <li><img src="{{ url_for('static', filename='Agbada.jpg') }}" alt="Single Agbada" width="80" height="80">Single Agbada - ₦1000 <small>(Express: +₦700)</small></li>
+                    <li><img src="{{ url_for('static', filename='Suite.jpg') }}" alt="Suit" width="80" height="80">Suite - ₦1000 <small>(Express: +₦500)</small></li>
+                </ul>
+            </div>
+            
+            <div class="price-col">
+                <h3>Shoes</h3>
+                <ul>
+                    <li><img src="{{ url_for('static', filename='canvas.jpg') }}" alt="Canvas Shoes" width="80" height="80">Canvas Shoes - ₦1500</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+</section>
+    <footer>
+        <p>&copy; 2025 Laundry Serivce. All rights reserved.</p>
+    </footer>
+        <script>
+        const navbar = document.querySelector('.navbar');
+        const menuToggle = document.querySelector('.menu-toggle');
+
+        menuToggle.addEventListener('click', () => {
+            navbar.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>

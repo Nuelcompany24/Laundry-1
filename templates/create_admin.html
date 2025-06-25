@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Register - Anchor Laundry</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="top-bar">
+    <div class="logo">
+        <img src="{{ url_for('static', filename='Logo.png') }}" alt="Laundry family"> Anchor University - Laundry Venture
+    </div>
+    <div class="contact-info">
+        <p>Hours: MON - SAT 8:00 am - 9:00 pm</p>
+        <p>Email: info@aul.edu.ng</p>
+        <a href="tel:+2347070679063" class="call-btn">Call (+234) 707 067 9063</a>
+    </div>
+</header>
+<nav>
+<nav class="navbar">
+    <a href="/">Home</a>
+    <a href="{{ url_for('service') }}">Services</a>
+    <a href="{{ url_for('price') }}">Pricing</a>
+    <a href="{{ url_for('booking') }}">Book Online</a>
+    <a href="{{ url_for('about') }}">About Us</a>
+    <a href="{{ url_for('contact') }}">Contact</a>
+    <a href="{{ url_for('login') }}" class="bin primary">Log In</a>
+</nav>
+</nav>
+<section class="regis">
+    <h2 class="reg">Register</h2>
+    <form method="POST">
+         {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="flash">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    {% if error %}
+        <p class="flash-danger" style="text-align: center;">{{ error }}</p>
+    {% endif %}
+        <input type="text" name="username" placeholder="Full Name" required><br>
+        <input type="text" name="phone" placeholder="Phone Number" required><br>
+        <input type="email" name="email" placeholder="Email" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required><br>
+
+        <button type="submit" class="btn-primary">Register</button>
+    </form>
+
+    <a href="{{ url_for('login') }}" class="tin">Already have an account? Login</a>
+</section>
+
+<footer>
+    <p>&copy; 2025 Laundry Service. All rights reserved.</p>
+</footer>
+
+<script>
+    const navbar = document.querySelector('.navbar');
+    const menuToggle = document.querySelector('.menu-toggle');
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navbar.classList.toggle('open');
+        });
+    }
+</script>
+</body>
+</html>
