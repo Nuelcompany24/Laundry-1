@@ -7,11 +7,10 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="compact">
-
   <!-- Header -->
   <header class="top-bar">
     <div class="logo">
-      <img src="{{ url_for('static', filename='Logo.png') }}" alt="Laundry family">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="Laundry family">
       Anchor University - Laundry Venture
     </div>
     <div class="contact-info">
@@ -63,6 +62,7 @@
           <td>{{ booking.status }}</td>
           <td>{{ booking.date }}</td>
           <td><button onclick="viewBookingById('{{ booking.order_id }}')">View</button></td>
+
         </tr>
         {% endfor %}
       </tbody>
@@ -116,17 +116,14 @@
     function closeModal() {
       document.getElementById("modal").classList.add("hidden");
     }
-    function viewBooking(orderId) {
-      document.getElementById('bookingDetails').innerHTML = "Loading...";
-      fetch(`/admin/booking/${orderId}`)
+    function viewBookingById(orderId) {
+  fetch(`/admin/booking/${orderId}`)
     .then(res => res.json())
     .then(data => {
-      if (data.error) return alert(data.error);
-
       const html = `
         <table class="detail-table">
           <tr><td><strong>Order ID</strong></td><td>${data.order_id}</td></tr>
-          <tr><td><strong>Name</strong></td><td>${data.full_name}</td></tr>
+          <tr><td><strong>Name</strong></td><td>${data.name}</td></tr>
           <tr><td><strong>Email</strong></td><td>${data.email}</td></tr>
           <tr><td><strong>Phone</strong></td><td>${data.phone}</td></tr>
           <tr><td><strong>Address</strong></td><td>${data.address || '-'}</td></tr>
@@ -136,12 +133,11 @@
           <tr><td><strong>Status</strong></td><td>${data.status}</td></tr>
           <tr><td><strong>Total</strong></td><td>₦${Number(data.total).toLocaleString()}</td></tr>
           <tr><td><strong>Payment Method</strong></td><td>${data.payment_method}</td></tr>
-          <tr><td><strong>Payment Status</strong></td><td>${data.payment_reference ? 'Paid' : 'Unpaid'}</td></tr>
-          <tr><td><strong>Special Instructions</strong></td><td>${data.special_instructions || '-'}</td></tr>
-          <tr><td><strong>Date</strong></td><td>${new Date(data.created_at).toLocaleString()}</td></tr>
+          <tr><td><strong>Payment Method</strong></td><td>${data.status}</td></tr>
+           <tr><td><strong>Payment Method</strong></td><td>${data.special_instructions}</td></tr>
+          <tr><td><strong>Date</strong></td><td>${data.created_at}</td></tr>
         </table>
       `;
-
       document.getElementById('bookingDetails').innerHTML = html;
       document.getElementById('modal').classList.remove('hidden');
     })
@@ -150,8 +146,6 @@
       alert("Could not load booking details.");
     });
 }
-
-
   </script>
 </body>
 </html>
